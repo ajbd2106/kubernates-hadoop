@@ -1,0 +1,28 @@
+kind: StatefulSet
+apiVersion: v1
+metadata:
+  name: hdfs-namenode
+spec:
+  replicas: 1
+  selector:
+    component: hdfs-namenode
+  template:
+    metadata:
+      labels:
+        component: hdfs-namenode
+    spec:
+      containers:
+        - name: hdfs-namenode
+          image: uhopper/hadoop-namenode:2.7.2
+          env:
+            - name: CLUSTER_NAME
+              value: hadoop-cluster
+          ports:
+            - containerPort: 8020
+              name: hdfs-namenode
+            - containerPort: 50070
+              name: hadoop-webhdfs
+          resources:
+            requests:
+              cpu: 100m
+      restartPolicy: Always

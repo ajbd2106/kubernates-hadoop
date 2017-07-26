@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hdfs-namenode
+  labels:
+    app: hdfs-namenode  
+spec:
+  ports:
+    - port: 8020
+      targetPort: 8020
+      name: hdfs-namenode
+      clusterIP: None
+  selector:
+    component: hdfs-namenode
+  type: LoadBalancer
